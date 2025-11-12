@@ -24,7 +24,10 @@
     <section id="home">
         <h1>Hi, I'm Yu-Chuan Tseng</h1>
 		<!-- 一些關於自己的標籤 -->
-		<p>Freshman. CS. Full stack developer...</p>
+        <div class="typewriter-container">
+		    <p class="typewriter"></p> <!-- 初始狀態打字機裡是沒有字的 -->
+            <!--Freshman. CS. Full stack developer...-->
+        </div>
     </section>
     <section id="about">
     <div class="about-me">
@@ -39,19 +42,35 @@
 		<!-- About Me -->
         <div class="tech-stack">
             <h2>Tech Stack</h2>
-            <div class="tech-icons">
-                <img src="html.png" alt="HTML" class="tech-icon">
-                <img src="css.png" alt="CSS" class="tech-icon">
-                <img src="javascript.png" alt="JavaScript" class="tech-icon">
-                <img src="typescript.png" alt="TypeScript" class="tech-icon">
-                <img src="golang.png" alt="Go" class="tech-icon">
-                <img src="python.png" alt="Python" class="tech-icon">
-                <img src="react.png" alt="React" class="tech-icon">
-                <img src="docker.png" alt="Docker" class="tech-icon">
-                <img src="tailwind.png" alt="Tailwind CSS" class="tech-icon">
-                <img src="git.png" alt="Git" class="tech-icon">
-                <img src="github.png" alt="GitHub" class="tech-icon">
-                <!-- 其他自己會的技術 -->
+            <div class="tech-icons-wrapper">
+                <div class="tech-icons">
+                    <img src="html.png" alt="HTML" class="tech-icon">
+                    <img src="css.png" alt="CSS" class="tech-icon">
+                    <img src="javascript.png" alt="JavaScript" class="tech-icon">
+                    <img src="typescript.png" alt="TypeScript" class="tech-icon">
+                    <img src="golang.png" alt="Go" class="tech-icon">
+                    <img src="python.png" alt="Python" class="tech-icon">
+                    <img src="react.png" alt="React" class="tech-icon">
+                    <img src="docker.png" alt="Docker" class="tech-icon">
+                    <img src="tailwind.png" alt="Tailwind CSS" class="tech-icon">
+                    <img src="git.png" alt="Git" class="tech-icon">
+                    <img src="github.png" alt="GitHub" class="tech-icon">
+                    <!-- 其他自己會的技術 -->
+                </div>
+                <div class="tech-icons"> <!--style="background-color: red;"-->
+                    <img src="html.png" alt="HTML" class="tech-icon">
+                    <img src="css.png" alt="CSS" class="tech-icon">
+                    <img src="javascript.png" alt="JavaScript" class="tech-icon">
+                    <img src="typescript.png" alt="TypeScript" class="tech-icon">
+                    <img src="golang.png" alt="Go" class="tech-icon">
+                    <img src="python.png" alt="Python" class="tech-icon">
+                    <img src="react.png" alt="React" class="tech-icon">
+                    <img src="docker.png" alt="Docker" class="tech-icon">
+                    <img src="tailwind.png" alt="Tailwind CSS" class="tech-icon">
+                    <img src="git.png" alt="Git" class="tech-icon">
+                    <img src="github.png" alt="GitHub" class="tech-icon">
+                    <!-- 其他自己會的技術 -->
+                </div>
             </div>
         </div>
         <div class="timeline">
@@ -125,6 +144,7 @@
             <button type="submit">Send Message</button>
         </div>
     </section>
+
 
     <script src="script.js"></script>
 </body>
