@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    background-color: #f5f5f7; /* Here */
+    /* outline: lightgreen 3px solid; */
 }
 
 .nav-links {
@@ -168,6 +168,31 @@ html {
     margin-bottom: 25px;
 }
 
+.project-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.project-search input {
+    flex: 1;
+    background-color: white;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 16px;
+}
+
+.project-search button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer; /*鼠標變pointer*/
+}
+
 .project-list {
     display: flex; /* 對於裡面的東西排列 */
     overflow-x: scroll;
@@ -178,7 +203,7 @@ html {
 }
 
 .project-item {
-    flex: 0 0 375px; /* grow, shrink, basis */
+    flex: 1 1 375px; /* grow, shrink, basis */
     background-color: white;
     border-radius: 16px;
     padding: 35px;
@@ -186,10 +211,36 @@ html {
 
     display: flex;
     flex-direction: column; /* 啟用 Flexbox 排版模式，讓子元素在垂直方向（column）排列 */
-    min-height: 250px; /* 設定最小高度為 250px，確保每個 .project-item 至少有一定的視覺空間 */
+    height: 375px; /* 設定最小高度為 250px，確保每個 .project-item 至少有一定的視覺空間 */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 加上陰影，向下 4px、模糊 6px、10% 透明度的黑色 */
     transition: all 0.3s ease;
+    overflow: hidden;
 }
+
+/* Control hovered card */
+.project-list:has(.project-item:hover) .content{
+opacity: 0; /*.3*/
+}
+
+
+.project-list:has(.project-item:hover) .project-item{
+    flex: 0 1 100px;
+}
+
+.project-list:has(.project-item:hover) .project-item:hover .content{
+    opacity : 1;
+}
+
+.project-list:has(.project-item:hover) .project-item:hover{
+    flex: 1 1 100px;
+}
+
+.content{
+    opacity : 1;/*不透明度*/
+    transition: opacity .3s ;
+}
+
+/**/
 
 .project-item h3 {
     font-size: 22.5px;
