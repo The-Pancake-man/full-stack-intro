@@ -141,3 +141,80 @@ function typeWriter() {
 
 // Start the typewriter effect
 typeWriter();
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// 觸發 -> 檢查現在位置 -> 更新狀態
+
+const sections = document.querySelectorAll("section"); 
+const navLinks = document.querySelectorAll(".nav-item a");
+
+function updateActiveNav() {
+    let currentSection = "";
+    
+    // 找到現在在哪個 section
+    sections.forEach(section => {
+
+        // 從頁面最頂端到當前關注的 section 的距離
+        const sectionTop = section.offsetTop;
+        
+        // 從頁面最頂端到現在捲動位置的距離       
+        // window.scrollY
+
+        // 如果畫面捲動位置在這個 section 的範圍內
+        if (window.scrollY >= sectionTop - 100) { // 100 是一個緩衝
+            currentSection = section.getAttribute("id");
+        }
+    });
+    
+    // 更新 nav 連結的 active 狀態
+    navLinks.forEach(link => {
+        // 先把所有連結的 active 樣式移除，也就是底線
+        link.classList.remove("active");
+        // 檢查這個連結的 href 屬性是否等於目前所在區塊的 id
+        if (link.getAttribute("href") === `#${currentSection}`) {
+            // 如果符合，就加上 active 樣式(底線)
+            link.classList.add("active");
+        }
+    });
+}
+
+// 每次滑動時都呼叫一次
+window.addEventListener("scroll", updateActiveNav);
+// 第一次打開網頁時滑動
+updateActiveNav();
+
+
+// 接著處理 Fade in/out 的效果
+
+const observerOptions = {
+    //root: null,          // 觀察的容器，null 表示瀏覽器視窗
+    threshold: 0.15, // 當 section 有 15% 進入畫面時觸發
+    rootMargin: "0px" // 擴大或縮小根元素的邊界從而改變被視為「可見」的區域。
+    // Margin 是向外擴增的
+};
+
+// 傳入的物件 entries 有很多資訊，其中包含 target 
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        // 當元素和觀察範圍（由 observerOptions.root 定義）有交集時 → true
+        if (entry.isIntersecting) {
+            // 當 section 進入畫面時淡入(加上 visible 的 class)
+            entry.target.classList.add("visible");
+        } else {
+            // 當 section 離開畫面時淡出
+            entry.target.classList.remove("visible");
+        }
+    });
+}, observerOptions); //依照 observerOptions，來決定何時加上或移除 visible class
+
+// 觀察所有 section
+sections.forEach(section => {
+    sectionObserver.observe(section);
+});
+
+// 觀察 About section 裡的子區塊（About Me, Tech Stack, Timeline）
+const fadeInSections = document.querySelectorAll(".fade-in-section");
+fadeInSections.forEach(section => {
+    sectionObserver.observe(section);
+});
