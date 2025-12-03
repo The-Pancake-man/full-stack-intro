@@ -33,41 +33,44 @@
   right: 0; /* 距離父元素右邊 0px */
   height: 2px;
   background-color: black;
-  /* transform: scaleX(0); */
-  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left; 
+  /* opacity: 0; */
 }
 
 .nav-item a.active::after {
-  animation: slideIn 2s ease forwards;
+  animation: slideIn 0.5s ease forwards;
 }
 
 @keyframes slideIn {
   from {
-    opacity: 0;
-    /* transform: scaleX(0); */
+    /* opacity: 0; */
+    transform: scaleX(0);
   }
   to {
-    opacity: 1;
-    /* transform: scaleX(1); */
+    /* opacity: 1; */
+    transform: scaleX(1);
   }
 }
 
 /*除了 about section 以外都先隱形掉*/
 /*那個 about 我們希望之後在動畫的部分直接調整它的子區塊*/
-#home,
+/* #home, */
 #projects,
 #contact,
+#skill,
 .fade-in-section {
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-#home.visible,
+/* #home.visible, */
 #about.visible,
 #projects.visible,
 #contact.visible,
-.fade-in-section.visible {
+#skill.visible,
+.fade-in-section.visible{
   opacity: 1;
   transform: translateY(0);
 }
@@ -77,28 +80,64 @@
 }
 
 nav {
-  background-color: #f5f5f7; /* Here */
+  background-color: rgba(245, 245, 247, 0.5);
+  
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  
   position: fixed;
   width: 100%;
   height: 25px; /*60px*/
   z-index: 1000; /* 數字越大在越上方 */
-  display: flex; /* 啟用 Flexbox 排版模式，方便控制子元素的排列方式 */
+  display: flex; 
   align-items: center;
-  justify-content: center; /* 水平方向置中導覽列內的項目 */
+  justify-content: center; 
+  
+  backdrop-filter: blur(5px); 
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+
 #home {
-  text-align: center; /* 文字水平置中 */
-  display: flex;
-  flex-direction: column;
-  padding-top: 38vh; /* 與上方的距離 */
-  justify-content: flex-start; /* 垂直置中 */
-  height: 100vh; /* 佔滿整個畫面 */
+    height: 100vh; /* 佔滿整個畫面 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 垂直置中 */
+    align-items: center;
+    color: white;
+    position: relative;
+    text-align: center; /* 文字水平置中 */
+    /*padding-top: 38vh; /* 與上方的距離 */
+
+    background-image: url('background.jpg');
+    background-size: cover;  
+    background-position: center top;  /* 照片置中且靠上裁切 */
+    background-repeat: no-repeat;  
+
+    background-attachment: fixed; /* 讓背景圖片相對於視口固定 */
 }
+
+
+#home h1 {
+    font-size: 3rem;
+    z-index: 5;
+}
+
+.typewriter-container {
+    z-index: 5;
+}
+
+#home::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.7));
+    pointer-events: none;
+}
+
+/**/
 
 #home h1 {
   font-size: 75px;
@@ -106,14 +145,19 @@ html {
 }
 
 .typewriter-container {
-  display: flex;
-  justify-content: center; /*讓文字置中*/
+    height: 2rem;     /* 固定高度，依照字體大小可自行調整 */
+    display: flex;
+    align-items: center; 
+    overflow: hidden; /* 保險措施 */
+    justify-content: center; /*讓文字置中*/
 }
 
 .typewriter {
-  border-right: 2px solid black; /* cursor */
+  border-right: 2px solid white; /* cursor */
   width: fit-content;
   animation: blink 0.75s step-end infinite; /*step-end*/
+  margin: 0;
+  white-space: nowrap;
 }
 
 @keyframes blink {
@@ -140,20 +184,59 @@ html {
   display: flex;
   align-items: center;
   gap: 60px;
+
+  padding-top: 40px;
+  padding-left: 60px; 
 }
 
 #about h2 {
-  font-size: 50px;
+  font-size: 55px;
   margin-bottom: 12px;
 }
 
 #about p {
-  font-size: 22.5px;
+  font-size: 26px;
   line-height: 2;
 }
 
+.cv-section {
+    margin-top: -10px;
+    display: flex;          /* ← 讓文字和按鈕排成同一行 */
+    align-items: center;    /* ← 垂直置中 */
+    gap: 20px;              /* ← 文字與按鈕距離 */
+}
+
+.cv-section p {
+    font-size: 22.5px;
+    /* margin-bottom: 20px; */
+}
+
+
+.cv-button {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer; /*鼠標變pointer*/
+  align-items: center;
+}
+
+
+.cv-button svg {
+    width: 24px;
+    height: 24px;
+}
+
+.cv-button:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+}
+
+
 .tech-stack {
-  margin-top: 150px; /* 上面的邊緣要設定多少 */
+  margin-top: 60px; /* 上面的邊緣要設定多少 */
   overflow: hidden; /*控制當元素內容超出其容器範圍時的顯示方式：不顯示也不滾動，可以用scroll*/
 }
 
@@ -197,7 +280,7 @@ html {
 }
 
 .timeline {
-  margin-top: 150px;
+  margin-top: 0px;
 }
 
 .timeline ul {
@@ -208,6 +291,94 @@ html {
   font-size: 22.5px;
   line-height: 2;
 }
+
+#skill {
+  padding: 80px;
+}
+
+#skill h2 {
+  font-size: 50px;
+  margin-bottom: 25px;
+}
+
+/* 垂直排列 */
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: visible;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-item {
+  background-color: white;
+  border-radius: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* 動畫 */
+}
+
+.skill-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.12);
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 三角箭頭 */
+.skill-arrow {
+  font-size: 40px;
+  transition: transform 0.2s ease;
+}
+
+.skill-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  margin-top: 0; 
+}
+
+.skill-items {
+  list-style-type: disc;  /* 顯示實心圓點 */
+  list-style-position: outside;
+  margin: 20px;          
+  padding-left: 40px;    
+  font-size: 16px;           
+  color: #333;                
+  line-height: 1.6;  /* 行距*/
+}
+
+.skill-items li {
+  margin-bottom: 10px; 
+}
+
+/* 展開時的樣式 */
+.skill-item.open .skill-body {
+  max-height: 200px; /* 展開高度*/
+  margin-top: 10px;
+}
+
+.skill-item.open .skill-arrow {
+  transform: rotate(90deg); /* 使用動畫完成轉的感覺 */
+}
+
+.skill-item h3 {
+  font-size: 22.5px;
+  margin: 0;
+}
+
+.skill-item p {
+  font-size: 17px;
+  line-height: 1.8;
+  margin: 0;
+}
+
 
 #projects {
   padding: 80px;
@@ -267,6 +438,10 @@ html {
   overflow: hidden;
 }
 
+.content p{
+  font-size: 12px;
+}
+
 /* Control hovered card */
 .project-list:has(.project-item:hover) .content {
   opacity: 0; /*.3*/
@@ -323,7 +498,7 @@ html {
 
 .social-links {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   margin-bottom: 20px;
 }
 
@@ -343,8 +518,8 @@ html {
 }
 
 .social-icon svg {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
 }
 
 .contact-form {

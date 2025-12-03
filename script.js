@@ -88,7 +88,7 @@ searchInput.addEventListener("keypress", (e)=> { //在文字欄輸入Enter後觸
 
 // Typewriter effect
 const typewriterElement = document.querySelector(".typewriter");
-const texts = ["NYCU Software Development Club.", "Core System.", "Clustron.", "HPC.", "Commonground."];
+const texts = [ "Major in Industrial Engineering and Management.", "National Yang Ming Chiao Tung University.", "NYCU Software Development Club.", "NTHU Data Science Club (Project student)."];
 let textIndex = 0;
 let isDeleting = false;
 
@@ -208,13 +208,36 @@ const sectionObserver = new IntersectionObserver((entries) => {
     });
 }, observerOptions); //依照 observerOptions，來決定何時加上或移除 visible class
 
-// 觀察所有 section
+// // 觀察所有 section
+// sections.forEach(section => {
+//     sectionObserver.observe(section);
+// });
+
+// 觀察除了 #home 以外的 section
 sections.forEach(section => {
-    sectionObserver.observe(section);
+    if (section.id !== "home") {
+        sectionObserver.observe(section);
+    }
 });
 
 // 觀察 About section 裡的子區塊（About Me, Tech Stack, Timeline）
 const fadeInSections = document.querySelectorAll(".fade-in-section");
 fadeInSections.forEach(section => {
     sectionObserver.observe(section);
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// 先抓出所有 skill-item
+const skillItems = document.querySelectorAll('.skill-item');
+
+skillItems.forEach(item => {
+  const header = item.querySelector('.skill-header');
+  const arrow  = item.querySelector('.skill-arrow');
+
+  header.addEventListener('click', () => {
+    // 切換 open class，
+    const isOpen = item.classList.toggle('open');
+    arrow.textContent = isOpen ? '▸' : '▸';
+  });
 });
